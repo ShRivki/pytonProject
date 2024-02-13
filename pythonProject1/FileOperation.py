@@ -1,11 +1,13 @@
 import pandas as pd
+import datetime
 
 
 class FileOperation:
 
     def __init__(self):
-       pass
-    def  read_csv(self, file_path: str):
+        pass
+
+    def read_csv(self, file_path: str):
         try:
             data = pd.read_csv(file_path)
             return data
@@ -20,4 +22,13 @@ class FileOperation:
         except Exception as e:
             print(f"Error saving data: {e}")
 
+    def error(self, error: str):
+        print('<{0},{1} >,type error:{2}<{0}>'.format('rivki', datetime.datetime.now().strftime("%d.%m.%y, %H:%M"),
+                                                      error))
 
+    def read_file(self, path):
+        try:
+            with open(path, 'r') as f:
+                return f.read()
+        except FileNotFoundError as e:
+            self.error(e)
